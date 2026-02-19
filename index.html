@@ -3,40 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ProDownloader - Tool Video Tanpa Watermark</title>
+    
+    <title>TikTok Downloader Tanpa Watermark HD - ProDownloader</title>
+    <meta name="description" content="Download video TikTok tanpa watermark kualitas HD tercepat 2026. Alat gratis, aman, dan mudah digunakan oleh Yuda Yudiansyah asal Garut.">
+    <meta name="keywords" content="tiktok downloader, download video tiktok, tanpa watermark, tt downloader, unduh video tiktok">
+    <meta name="author" content="Yuda Yudiansyah Asal Garut">
+
     <style>
-        /* CSS UNTUK TAMPILAN MEWAH */
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Segoe UI', sans-serif;
             background-color: #0f172a;
             color: white;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
-            min-height: 100vh;
             margin: 0;
+            padding: 20px;
         }
         .container {
             background-color: #1e293b;
             padding: 2rem;
             border-radius: 1rem;
             box-shadow: 0 10px 25px rgba(0,0,0,0.5);
-            width: 90%;
-            max-width: 500px;
+            width: 100%;
+            max-width: 600px;
             text-align: center;
         }
-        h1 { color: #38bdf8; margin-bottom: 1rem; }
+        h1 { color: #38bdf8; }
         input {
             width: 100%;
             padding: 12px;
-            margin-bottom: 1rem;
+            margin: 15px 0;
             border-radius: 8px;
             border: none;
-            outline: none;
             box-sizing: border-box;
         }
-        button {
+        .btn-process {
             width: 100%;
             padding: 12px;
             background-color: #38bdf8;
@@ -45,73 +47,97 @@
             font-weight: bold;
             border-radius: 8px;
             cursor: pointer;
-            transition: 0.3s;
         }
-        button:hover { background-color: #0ea5e9; }
-        #result { margin-top: 1.5rem; display: none; }
-        .ad-space {
-            margin-top: 2rem;
-            padding: 1rem;
-            background: #334155;
-            border: 1px dashed #64748b;
-            font-size: 12px;
+        #resultArea {
+            display: none;
+            margin-top: 20px;
+            padding: 15px;
+            border: 1px solid #334155;
+            border-radius: 10px;
+        }
+        .timer-text { color: #f39c12; font-weight: bold; }
+        .article-section {
+            margin-top: 40px;
+            text-align: left;
+            max-width: 600px;
             color: #94a3b8;
+            line-height: 1.6;
         }
+        .footer { margin-top: 30px; font-size: 12px; color: #475569; }
     </style>
 </head>
 <body>
 
     <div class="container">
         <h1>ProDownloader</h1>
-        <p>Tempel link video TikTok di bawah ini:</p>
-        <input type="text" id="videoUrl" placeholder="https://www.tiktok.com/@user/video/...">
-        <button onclick="downloadVideo()">PROSES VIDEO</button>
+        <p>Unduh Video TikTok Tanpa Watermark</p>
+        
+        <input type="text" id="videoUrl" placeholder="Tempel link TikTok di sini...">
+        <button class="btn-process" onclick="startProcess()">PROSES VIDEO</button>
 
-        <div id="result">
-            <p>Video Berhasil Diproses!</p>
-            <a id="downloadBtn" href="#" target="_blank">
-                <button style="background-color: #22c55e; color: white;">DOWNLOAD SEKARANG</button>
+        <div id="resultArea">
+            <p id="statusText">Video ditemukan! Menyiapkan link...</p>
+            <div id="timerContainer">
+                Link download muncul dalam: <span id="seconds">5</span> detik
+            </div>
+            <a id="finalDownloadLink" href="#" target="_blank" style="display: none;">
+                <button class="btn-process" style="background-color: #22c55e; color: white;">DOWNLOAD SEKARANG (HD)</button>
             </a>
-        </div>
-
-        <div class="ad-space">
-            TEMPAT IKLAN DISINI<br>
-            (Penghasilan Dollar Kamu Muncul di Sini)
         </div>
     </div>
 
+    <div class="article-section">
+        <h2>Cara Download Video TikTok Tanpa Watermark</h2>
+        <p>Selamat datang di <strong>ProDownloader</strong>, alat terbaik untuk mengunduh video TikTok tanpa tanda air (watermark). Kami menggunakan teknologi terbaru tahun 2026 untuk memastikan hasil unduhan tetap jernih (HD).</p>
+        
+        <h3>Kenapa Harus Menggunakan ProDownloader?</h3>
+        <ul>
+            <li><strong>Gratis & Cepat:</strong> Tidak perlu mendaftar atau membayar.</li>
+            <li><strong>Kualitas HD:</strong> Menjaga resolusi video tetap asli.</li>
+            <li><strong>Aman:</strong> Kami tidak menyimpan data pribadi Anda.</li>
+        </ul>
+        <p>Alat ini dikembangkan dengan dedikasi tinggi oleh <strong>Yuda Yudiansyah asal Garut</strong> untuk membantu para kreator konten mendapatkan footage berkualitas.</p>
+    </div>
+
+    <div class="footer">
+        &copy; 2026 ProDownloader | Developed by Yuda Yudiansyah Asal Garut
+    </div>
+
     <script>
-        async function downloadVideo() {
+        async function startProcess() {
             const url = document.getElementById('videoUrl').value;
-            const resultDiv = document.getElementById('result');
-            const downloadBtn = document.getElementById('downloadBtn');
+            const resultArea = document.getElementById('resultArea');
+            const timerContainer = document.getElementById('timerContainer');
+            const downloadLink = document.getElementById('finalDownloadLink');
+            const secondsSpan = document.getElementById('seconds');
 
-            if (!url) {
-                alert("Tolong masukkan link dulu!");
-                return;
-            }
+            if (!url) { return alert("Masukkan link TikTok!"); }
 
-            // Animasi Loading
-            document.querySelector('button').innerText = "MENGAMBIL DATA...";
+            resultArea.style.display = 'block';
+            downloadLink.style.display = 'none';
+            timerContainer.style.display = 'block';
 
             try {
-                // Trik: Menggunakan API gratis pihak ketiga (TikWM)
                 const response = await fetch(`https://www.tikwm.com/api/?url=${url}`);
                 const data = await response.json();
 
                 if (data.code === 0) {
-                    // Tampilkan tombol download
-                    downloadBtn.href = data.data.play; // Ini link video tanpa watermark
-                    resultDiv.style.display = 'block';
-                    document.querySelector('button').innerText = "PROSES VIDEO";
+                    let timeLeft = 5;
+                    const interval = setInterval(() => {
+                        timeLeft--;
+                        secondsSpan.innerText = timeLeft;
+                        if (timeLeft <= 0) {
+                            clearInterval(interval);
+                            timerContainer.style.display = 'none';
+                            downloadLink.href = data.data.play;
+                            downloadLink.style.display = 'block';
+                        }
+                    }, 1000);
                 } else {
-                    alert("Video tidak ditemukan atau link salah.");
-                    document.querySelector('button').innerText = "PROSES VIDEO";
+                    alert("Video tidak ditemukan!");
                 }
-            } catch (error) {
-                console.error(error);
-                alert("Terjadi kesalahan teknis.");
-                document.querySelector('button').innerText = "PROSES VIDEO";
+            } catch (e) {
+                alert("Gangguan koneksi!");
             }
         }
     </script>
