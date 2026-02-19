@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ProDownloader - Tool Video Tanpa Watermark</title>
+    <style>
+        /* CSS UNTUK TAMPILAN MEWAH */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #0f172a;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background-color: #1e293b;
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+            width: 90%;
+            max-width: 500px;
+            text-align: center;
+        }
+        h1 { color: #38bdf8; margin-bottom: 1rem; }
+        input {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 1rem;
+            border-radius: 8px;
+            border: none;
+            outline: none;
+            box-sizing: border-box;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #38bdf8;
+            border: none;
+            color: #0f172a;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        button:hover { background-color: #0ea5e9; }
+        #result { margin-top: 1.5rem; display: none; }
+        .ad-space {
+            margin-top: 2rem;
+            padding: 1rem;
+            background: #334155;
+            border: 1px dashed #64748b;
+            font-size: 12px;
+            color: #94a3b8;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>ProDownloader</h1>
+        <p>Tempel link video TikTok di bawah ini:</p>
+        <input type="text" id="videoUrl" placeholder="https://www.tiktok.com/@user/video/...">
+        <button onclick="downloadVideo()">PROSES VIDEO</button>
+
+        <div id="result">
+            <p>Video Berhasil Diproses!</p>
+            <a id="downloadBtn" href="#" target="_blank">
+                <button style="background-color: #22c55e; color: white;">DOWNLOAD SEKARANG</button>
+            </a>
+        </div>
+
+        <div class="ad-space">
+            TEMPAT IKLAN DISINI<br>
+            (Penghasilan Dollar Kamu Muncul di Sini)
+        </div>
+    </div>
+
+    <script>
+        async function downloadVideo() {
+            const url = document.getElementById('videoUrl').value;
+            const resultDiv = document.getElementById('result');
+            const downloadBtn = document.getElementById('downloadBtn');
+
+            if (!url) {
+                alert("Tolong masukkan link dulu!");
+                return;
+            }
+
+            // Animasi Loading
+            document.querySelector('button').innerText = "MENGAMBIL DATA...";
+
+            try {
+                // Trik: Menggunakan API gratis pihak ketiga (TikWM)
+                const response = await fetch(`https://www.tikwm.com/api/?url=${url}`);
+                const data = await response.json();
+
+                if (data.code === 0) {
+                    // Tampilkan tombol download
+                    downloadBtn.href = data.data.play; // Ini link video tanpa watermark
+                    resultDiv.style.display = 'block';
+                    document.querySelector('button').innerText = "PROSES VIDEO";
+                } else {
+                    alert("Video tidak ditemukan atau link salah.");
+                    document.querySelector('button').innerText = "PROSES VIDEO";
+                }
+            } catch (error) {
+                console.error(error);
+                alert("Terjadi kesalahan teknis.");
+                document.querySelector('button').innerText = "PROSES VIDEO";
+            }
+        }
+    </script>
+</body>
+</html>
